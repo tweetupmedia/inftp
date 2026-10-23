@@ -1,0 +1,49 @@
+<svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Navy Background Rounded Squircle -->
+  <rect width="512" height="512" rx="128" fill="#071D3A"/>
+  
+  <!-- Suitcase Handle Arch -->
+  <path
+    d="M 205 130 V 78 C 205 60, 220 48, 238 48 H 274 C 292 48, 307 60, 307 78 V 130"
+    stroke="#FFFFFF"
+    stroke-width="28"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+  />
+
+  <!-- Suitcase Body -->
+  <rect
+    x="96"
+    y="130"
+    width="320"
+    height="300"
+    rx="48"
+    ry="48"
+    stroke="#FFFFFF"
+    stroke-width="28"
+    fill="#071D3A"
+  />
+
+  <!-- 'pp' in vibrant orange inside suitcase -->
+  <!-- First 'p' -->
+  <rect x="160" y="210" width="26" height="155" rx="13" fill="#F15A24"/>
+  <path
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M 172 210 C 212 210 242 235 242 272 C 242 309 212 334 172 334 H 168 V 210 H 172 Z M 186 236 V 308 C 206 308 220 292 220 272 C 220 252 206 236 186 236 Z"
+    fill="#F15A24"
+  />
+
+  <!-- Second 'p' -->
+  <rect x="264" y="210" width="26" height="155" rx="13" fill="#F15A24"/>
+  <path
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M 276 210 C 316 210 346 235 346 272 C 346 309 316 334 276 334 H 272 V 210 H 276 Z M 290 236 V 308 C 310 308 324 292 324 272 C 324 252 310 236 290 236 Z"
+    fill="#F15A24"
+  />
+
+  <!-- Tag accent -->
+  <circle cx="410" cy="140" r="14" fill="#F15A24"/>
+</svg>

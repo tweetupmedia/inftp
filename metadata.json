@@ -1,0 +1,6 @@
+{
+  "name": "Info Tripp — Travel. Simplified.",
+  "description": "Book flights, trains, buses, hotels, tour packages and pilgrimage trips with Info Tripp. Visa help and trip planning from Noida, with support on WhatsApp.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
