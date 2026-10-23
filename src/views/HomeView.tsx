@@ -27,6 +27,7 @@ import {
   REVIEWS, 
   CHRONICLES 
 } from '../data/mockData';
+import { HeroSearchWidget } from '../components/HeroSearchWidget';
 
 interface HomeViewProps {
   onNavigate: (page: PageId) => void;
@@ -39,21 +40,11 @@ export const HomeView: React.FC<HomeViewProps> = ({
   onSelectPackage,
   onOpenPlanModal
 }) => {
-  // Quick triage state
-  const [triageDest, setTriageDest] = useState('Kashmir');
-  const [triageStyle, setTriageStyle] = useState('Family & Scenic');
-  const [triageMonth, setTriageMonth] = useState('Upcoming 30 Days');
-
   // Testimonial slider state
   const [testimonialIdx, setTestimonialIdx] = useState(0);
 
   const featuredPackages = PACKAGES.filter((p) => p.featured);
   const featuredDestinations = DESTINATIONS.filter((d) => d.featured).slice(0, 4);
-
-  const handleTriageSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onOpenPlanModal(triageDest);
-  };
 
   const nextTestimonial = () => {
     setTestimonialIdx((prev) => (prev + 1) % REVIEWS.length);
@@ -93,113 +84,12 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </p>
           </div>
 
-          {/* Quick-Triage Widget */}
-          <div className="mt-8 sm:mt-12 max-w-4xl mx-auto">
-            <form 
-              id="hero-quick-triage-form"
-              onSubmit={handleTriageSubmit}
-              className="bg-white/95 backdrop-blur-md rounded-2xl p-4 sm:p-5 shadow-2xl border border-white/60 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-center"
-            >
-              {/* Where to go */}
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider block">
-                  Where to go?
-                </label>
-                <div className="relative">
-                  <MapPin className="w-4 h-4 text-[#071D3A] absolute left-3 top-3" />
-                  <select
-                    id="triage-dest-select"
-                    value={triageDest}
-                    onChange={(e) => setTriageDest(e.target.value)}
-                    className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-[#071D3A]"
-                  >
-                    <option value="Kashmir">Kashmir (Srinagar, Gulmarg)</option>
-                    <option value="Mathura & Vrindavan">Mathura & Vrindavan (1 Day from NCR)</option>
-                    <option value="Ayodhya">Ayodhya (Ram Mandir & Saryu Aarti)</option>
-                    <option value="Gangasagar">Gangasagar (1 Day from Kolkata)</option>
-                    <option value="Shirdi">Shirdi & Shani Shingnapur (Sai Darshan)</option>
-                    <option value="Khatu Shyam & Salasar Balaji">Khatu Shyam & Salasar (from NCR)</option>
-                    <option value="Rajasthan">Rajasthan (Havelis & Palaces)</option>
-                    <option value="Bali">Bali (Villas & Nusa Islands)</option>
-                    <option value="Switzerland">Switzerland (Scenic Alps Rail)</option>
-                    <option value="Ladakh">Ladakh (High Passes & Domes)</option>
-                    <option value="Kerala">Kerala (Houseboats & Hills)</option>
-                    <option value="Vietnam">Vietnam (Ha Long Bay Karsts)</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Travel Style */}
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider block">
-                  Travel Style
-                </label>
-                <div className="relative">
-                  <Luggage className="w-4 h-4 text-[#F15A24] absolute left-3 top-3" />
-                  <select
-                    id="triage-style-select"
-                    value={triageStyle}
-                    onChange={(e) => setTriageStyle(e.target.value)}
-                    className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-[#071D3A]"
-                  >
-                    <option value="Pilgrimage & Sacred">Pilgrimage & Sacred Darshan</option>
-                    <option value="Family & Scenic">Family & Scenic Leisure</option>
-                    <option value="Romantic Honeymoon">Romantic Honeymoon & Luxury</option>
-                    <option value="Heritage & Royal Culture">Heritage & Royal Culture</option>
-                    <option value="Mountain Adventure">Mountain Adventure & Snow</option>
-                    <option value="Wellness & Backwaters">Wellness, Ayurveda & Spa</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Departure Month */}
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider block">
-                  When?
-                </label>
-                <div className="relative">
-                  <Calendar className="w-4 h-4 text-[#F15A24] absolute left-3 top-3" />
-                  <select
-                    id="triage-month-select"
-                    value={triageMonth}
-                    onChange={(e) => setTriageMonth(e.target.value)}
-                    className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-[#071D3A]"
-                  >
-                    <option value="Upcoming 30 Days">Next 30 Days</option>
-                    <option value="Within 2-3 Months">Within 2 – 3 Months</option>
-                    <option value="Upcoming Festive Holidays">Festive Season</option>
-                    <option value="Summer Holidays">Summer Holidays</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Submit CTA */}
-              <div className="pt-2 sm:pt-4 lg:pt-5">
-                <button
-                  id="hero-triage-submit-btn"
-                  type="submit"
-                  className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-[#071D3A] hover:bg-[#05152B] text-white font-semibold rounded-xl text-sm shadow-md transition-all active:scale-95"
-                >
-                  <Sparkles className="w-4 h-4 text-[#F15A24]" />
-                  <span>Find My Trip</span>
-                </button>
-              </div>
-            </form>
-
-            <div className="mt-4 flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs text-slate-700 font-medium">
-              <span className="flex items-center gap-1.5 bg-white/80 backdrop-blur-xs px-3 py-1 rounded-full border border-slate-200 shadow-xs">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#F15A24]" />
-                Zero hidden taxes &amp; tolls
-              </span>
-              <span className="flex items-center gap-1.5 bg-white/80 backdrop-blur-xs px-3 py-1 rounded-full border border-slate-200 shadow-xs">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#F15A24]" />
-                Direct WhatsApp human lead
-              </span>
-              <span className="flex items-center gap-1.5 bg-white/80 backdrop-blur-xs px-3 py-1 rounded-full border border-slate-200 shadow-xs">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#F15A24]" />
-                Flexible date shifting
-              </span>
-            </div>
+          {/* Integrated Flight / Hotel / Package Search Widget */}
+          <div className="mt-8 sm:mt-12">
+            <HeroSearchWidget 
+              onOpenPlanModal={onOpenPlanModal} 
+              onNavigate={onNavigate} 
+            />
           </div>
         </div>
       </section>
